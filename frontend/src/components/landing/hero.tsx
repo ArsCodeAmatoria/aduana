@@ -5,14 +5,27 @@ import { motion } from "framer-motion"
 import { GlobeIcon, PackageIcon, CreditCardIcon, GaugeIcon, ArrowDownIcon } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { WaveAnimation } from "../three/WaveAnimation"
 
 export function Hero() {
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-slate-900 pt-24 md:pt-28">
-      {/* Background with gradient overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-slate-900/90 z-10" />
-        <div className="absolute inset-0 bg-[url('/images/world-trade-bg.jpg')] bg-cover bg-center opacity-40" />
+      {/* ThreeJS Animation Background */}
+      <WaveAnimation />
+      
+      {/* Add a semi-transparent overlay to ensure text remains readable */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 to-slate-900/80 z-[1]"></div>
+      
+      {/* Background with gradient overlay - move this below WaveAnimation and adjust z-index */}
+      <div className="absolute inset-0 z-[1]">
+        <Image
+          src="/images/hero-bg.jpg"
+          alt="Hero background"
+          fill
+          priority
+          className="object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-900"></div>
       </div>
       
       {/* Animated grid pattern */}
@@ -20,8 +33,8 @@ export function Hero() {
         <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-repeat" />
       </div>
       
-      {/* Content */}
-      <div className="container relative z-10 px-4 md:px-6 mx-auto flex flex-col items-center text-center">
+      {/* Container should have a higher z-index than the gradient overlay */}
+      <div className="container mx-auto px-4 relative z-[2]">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
