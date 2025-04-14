@@ -3,6 +3,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CoinsIcon, LineChart, BarChart3, PieChart } from "lucide-react"
 import {
   Chart as ChartJS,
   ArcElement,
@@ -38,16 +39,16 @@ export function DaoInsurance() {
       {
         data: [35, 25, 20, 20],
         backgroundColor: [
-          "rgba(54, 162, 235, 0.8)",
-          "rgba(75, 192, 192, 0.8)",
-          "rgba(153, 102, 255, 0.8)",
-          "rgba(255, 159, 64, 0.8)",
+          "rgba(59, 130, 246, 0.8)",  // blue-500
+          "rgba(99, 102, 241, 0.8)",  // indigo-500
+          "rgba(139, 92, 246, 0.8)",  // purple-500
+          "rgba(14, 165, 233, 0.8)",  // sky-500
         ],
         borderColor: [
-          "rgba(54, 162, 235, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
+          "rgba(59, 130, 246, 1)",
+          "rgba(99, 102, 241, 1)",
+          "rgba(139, 92, 246, 1)",
+          "rgba(14, 165, 233, 1)",
         ],
         borderWidth: 1,
       },
@@ -61,15 +62,15 @@ export function DaoInsurance() {
       {
         label: "Traditional Tariffs",
         data: [10, 12, 15, 14, 16, 19],
-        borderColor: "rgba(255, 99, 132, 1)",
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(239, 68, 68, 1)",  // red-500
+        backgroundColor: "rgba(239, 68, 68, 0.2)",
         tension: 0.4,
       },
       {
         label: "With Aduana Pools",
         data: [10, 9, 8, 7, 6, 5],
-        borderColor: "rgba(54, 162, 235, 1)",
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        borderColor: "rgba(59, 130, 246, 1)",  // blue-500
+        backgroundColor: "rgba(59, 130, 246, 0.2)",
         tension: 0.4,
       },
     ],
@@ -82,12 +83,12 @@ export function DaoInsurance() {
       {
         label: "2023",
         data: [65, 15, 12, 8],
-        backgroundColor: "rgba(75, 192, 192, 0.8)",
+        backgroundColor: "rgba(99, 102, 241, 0.8)",  // indigo-500
       },
       {
         label: "2024",
         data: [75, 10, 9, 6],
-        backgroundColor: "rgba(54, 162, 235, 0.8)",
+        backgroundColor: "rgba(59, 130, 246, 0.8)",  // blue-500
       },
     ],
   }
@@ -98,10 +99,21 @@ export function DaoInsurance() {
     plugins: {
       legend: {
         position: "bottom" as const,
+        labels: {
+          color: "rgba(255, 255, 255, 0.8)",
+          font: {
+            size: 12
+          }
+        }
       },
       title: {
         display: true,
         text: "Insurance Pool Allocations",
+        color: "rgba(255, 255, 255, 0.8)",
+        font: {
+          size: 14,
+          weight: "normal" as const
+        }
       },
     },
   }
@@ -111,16 +123,41 @@ export function DaoInsurance() {
     plugins: {
       legend: {
         position: "bottom" as const,
+        labels: {
+          color: "rgba(255, 255, 255, 0.8)",
+          font: {
+            size: 12
+          }
+        }
       },
       title: {
         display: true,
         text: "Tariff Costs Over Time (% of Shipment Value)",
+        color: "rgba(255, 255, 255, 0.8)",
+        font: {
+          size: 14,
+          weight: "normal" as const
+        }
       },
     },
     scales: {
       y: {
         beginAtZero: true,
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)"
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.6)"
+        }
       },
+      x: {
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)"
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.6)"
+        }
+      }
     },
   }
 
@@ -129,22 +166,56 @@ export function DaoInsurance() {
     plugins: {
       legend: {
         position: "bottom" as const,
+        labels: {
+          color: "rgba(255, 255, 255, 0.8)",
+          font: {
+            size: 12
+          }
+        }
       },
       title: {
         display: true,
         text: "DAO Dispute Resolution Results (%)",
+        color: "rgba(255, 255, 255, 0.8)",
+        font: {
+          size: 14,
+          weight: "normal" as const
+        }
       },
     },
     scales: {
       y: {
         beginAtZero: true,
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)"
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.6)"
+        }
       },
+      x: {
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)"
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.6)"
+        }
+      }
     },
   }
 
   return (
-    <section id="insurance" className="w-full py-20 bg-slate-50">
-      <div className="container px-4 md:px-6 mx-auto">
+    <section id="insurance" className="w-full py-24 bg-slate-900 relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        <div className="absolute -top-1/4 right-1/4 w-[600px] h-[600px] bg-blue-600 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 -left-1/4 w-[500px] h-[500px] bg-indigo-600 rounded-full blur-3xl" />
+      </div>
+      
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-repeat opacity-5" />
+      
+      <div className="container px-4 md:px-6 mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -152,9 +223,14 @@ export function DaoInsurance() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold tracking-tight">DAO Insurance & Pools</h2>
-          <p className="mt-4 text-slate-600 md:text-lg max-w-3xl mx-auto">
-            Our decentralized insurance system and equity pools distribute risk and reduce costs across the network.
+          <div className="inline-block mb-3 px-4 py-1.5 bg-white/10 backdrop-blur-sm rounded-full">
+            <p className="text-blue-300 font-medium text-sm">Risk Management</p>
+          </div>
+          
+          <h2 className="text-4xl font-bold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300">DAO Insurance & Pools</h2>
+          
+          <p className="text-slate-300 md:text-lg max-w-3xl mx-auto">
+            Our decentralized insurance system and equity pools distribute risk and reduce costs across the network through collective risk-sharing.
           </p>
         </motion.div>
         
@@ -164,16 +240,24 @@ export function DaoInsurance() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ y: -5 }}
+            className="transition-transform duration-300"
           >
-            <Card className="h-full">
-              <CardHeader>
-                <CardTitle>Insurance Pool Model</CardTitle>
+            <Card className="h-full bg-slate-800/50 border-white/5 backdrop-blur-sm overflow-hidden">
+              <div className="h-1.5 w-full bg-gradient-to-r from-blue-500 to-indigo-600"></div>
+              <CardHeader className="border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600">
+                    <PieChart className="h-5 w-5 text-white" />
+                  </div>
+                  <CardTitle className="text-white">Insurance Pool Model</CardTitle>
+                </div>
               </CardHeader>
-              <CardContent>
-                <p className="mb-6 text-slate-600">
+              <CardContent className="pt-6">
+                <p className="mb-6 text-slate-300">
                   The Aduana insurance pool protects traders against unexpected tariff changes, regulatory actions, and trade disputes through a collective risk-sharing model.
                 </p>
-                <div className="h-[300px] flex items-center justify-center">
+                <div className="h-[300px] flex items-center justify-center p-4 bg-slate-900/50 rounded-lg">
                   <Pie data={pieData} options={pieOptions} />
                 </div>
               </CardContent>
@@ -185,16 +269,24 @@ export function DaoInsurance() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.4 }}
+            whileHover={{ y: -5 }}
+            className="transition-transform duration-300"
           >
-            <Card className="h-full">
-              <CardHeader>
-                <CardTitle>Tariff Savings Projection</CardTitle>
+            <Card className="h-full bg-slate-800/50 border-white/5 backdrop-blur-sm overflow-hidden">
+              <div className="h-1.5 w-full bg-gradient-to-r from-indigo-500 to-purple-600"></div>
+              <CardHeader className="border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600">
+                    <LineChart className="h-5 w-5 text-white" />
+                  </div>
+                  <CardTitle className="text-white">Tariff Savings Projection</CardTitle>
+                </div>
               </CardHeader>
-              <CardContent>
-                <p className="mb-6 text-slate-600">
+              <CardContent className="pt-6">
+                <p className="mb-6 text-slate-300">
                   By joining Aduana equity pools, traders can achieve significant savings on tariff costs over time through optimized compliance and collective bargaining.
                 </p>
-                <div className="h-[300px] flex items-center justify-center">
+                <div className="h-[300px] flex items-center justify-center p-4 bg-slate-900/50 rounded-lg">
                   <Line data={lineData} options={lineOptions} />
                 </div>
               </CardContent>
@@ -207,21 +299,41 @@ export function DaoInsurance() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="w-full"
+          whileHover={{ y: -5 }}
+          className="w-full transition-transform duration-300"
         >
-          <Card>
-            <CardHeader>
-              <CardTitle>DAO Dispute Resolution</CardTitle>
+          <Card className="bg-slate-800/50 border-white/5 backdrop-blur-sm overflow-hidden">
+            <div className="h-1.5 w-full bg-gradient-to-r from-blue-500 to-sky-500"></div>
+            <CardHeader className="border-b border-white/5">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500 to-sky-500">
+                  <BarChart3 className="h-5 w-5 text-white" />
+                </div>
+                <CardTitle className="text-white">DAO Dispute Resolution</CardTitle>
+              </div>
             </CardHeader>
-            <CardContent>
-              <p className="mb-6 text-slate-600">
+            <CardContent className="pt-6">
+              <p className="mb-6 text-slate-300">
                 The Aduana DAO provides efficient dispute resolution through decentralized governance, with most cases resolved quickly and fairly through the community-driven process.
               </p>
-              <div className="h-[300px] flex items-center justify-center">
+              <div className="h-[300px] flex items-center justify-center p-4 bg-slate-900/50 rounded-lg">
                 <Bar data={barData} options={barOptions} />
               </div>
             </CardContent>
           </Card>
+        </motion.div>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-16 text-center"
+        >
+          <div className="inline-flex items-center justify-center px-6 py-3 border border-white/10 rounded-full backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-colors">
+            <CoinsIcon className="h-5 w-5 text-blue-300 mr-2" />
+            <span className="text-blue-200">Backed by a secure and transparent risk assessment model</span>
+          </div>
         </motion.div>
       </div>
     </section>
