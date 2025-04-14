@@ -21,14 +21,14 @@ This monorepo contains three main components:
 ```
 aduana/
 ├── frontend/       # Next.js application with UI components
-├── docs/           # Documentation and whitepaper content
+│   └── src/app/docs/  # Integrated documentation 
 └── runtime/        # Substrate-based blockchain implementation
 ```
 
 ## Technology Stack
 
 - **Frontend**: Next.js, Tailwind CSS, Shadcn UI, Framer Motion, Chart.js
-- **Documentation**: Fumadocs
+- **Documentation**: Integrated in Next.js app with custom components
 - **Blockchain**: Substrate, Kusama, POP integration
 
 ## Quick Start
@@ -55,27 +55,17 @@ The frontend will be available at [http://localhost:3000](http://localhost:3000)
 
 ### Documentation
 
-```bash
-# Navigate to docs directory
-cd docs
-
-# Install dependencies
-npm install
-
-# Start documentation site
-npm run dev
-```
-
-The documentation site will be available at [http://localhost:3001](http://localhost:3001).
+The documentation is integrated in the frontend application and will be available at [http://localhost:3000/docs](http://localhost:3000/docs) when running the frontend development server.
 
 ### Runtime Development
 
 ```bash
-# Navigate to runtime directory
-cd runtime
+# Execute the build script
+./build.sh
 
-# Follow Substrate setup instructions
-# ...
+# Or for individual components
+cd runtime/pallets/[pallet_name]
+cargo check
 ```
 
 ## Contributing
