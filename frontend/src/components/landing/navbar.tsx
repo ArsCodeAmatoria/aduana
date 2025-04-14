@@ -28,7 +28,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold text-white">Aduana</span>
+            <span className="text-2xl font-extrabold text-white">Aduana</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -47,7 +47,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             <Button 
               variant="outline" 
-              className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white"
+              className="border-blue-400/50 border-2 text-white hover:bg-blue-500/20 hover:text-white"
             >
               Connect
             </Button>
@@ -91,7 +91,7 @@ export function Navbar() {
               <div className="flex flex-col space-y-3 pt-4 border-t border-slate-800">
                 <Button 
                   variant="outline" 
-                  className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white w-full"
+                  className="border-blue-400/50 border-2 text-white hover:bg-blue-500/20 hover:text-white w-full"
                 >
                   Connect
                 </Button>

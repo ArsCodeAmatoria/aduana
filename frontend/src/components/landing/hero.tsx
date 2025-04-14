@@ -53,7 +53,7 @@ export function Hero() {
             </Button>
           </Link>
           <Link href="/docs">
-            <Button size="lg" variant="outline" className="border-blue-400/30 text-white hover:bg-blue-500/20 text-lg px-8 py-6 h-auto backdrop-blur-sm">
+            <Button size="lg" variant="outline" className="border-blue-400/50 text-white hover:bg-blue-500/20 text-lg px-8 py-6 h-auto backdrop-blur-sm border-2">
               Explore Documentation
             </Button>
           </Link>
