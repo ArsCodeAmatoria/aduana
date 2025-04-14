@@ -2,20 +2,8 @@
 
 import React, { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Text, PerspectiveCamera } from '@react-three/drei'
+import { PerspectiveCamera } from '@react-three/drei'
 import * as THREE from 'three'
-
-// Stock data - added more stocks for visibility
-const STOCK_DATA = [
-  { symbol: 'DUANA', price: '+12.4%' },
-  { symbol: 'TRADE', price: '+8.7%' },
-  { symbol: 'VERIFY', price: '+9.1%' },
-  { symbol: 'GLOBAL', price: '+5.6%' },
-  { symbol: 'TOKEN', price: '+3.9%' },
-  { symbol: 'TARIFF', price: '-2.3%' },
-  { symbol: 'CHAIN', price: '+6.2%' },
-  { symbol: 'INDEX', price: '+10.5%' },
-]
 
 interface WaveProps {
   position: [number, number, number];
@@ -24,13 +12,6 @@ interface WaveProps {
   amplitude: number;
   frequency: number;
   thickness?: number;
-}
-
-interface StockPriceProps {
-  position: [number, number, number];
-  data: { symbol: string; price: string };
-  index: number;
-  delay: number;
 }
 
 // Wave component with increased visibility
@@ -78,60 +59,6 @@ function Wave({ position, color, speed, amplitude, frequency, thickness = 5 }: W
       </bufferGeometry>
       <lineBasicMaterial color={color} linewidth={thickness} opacity={1} transparent />
     </line>
-  );
-}
-
-// Stock price element with better visibility
-function StockPrice({ position, data, index, delay }: StockPriceProps) {
-  const textRef = useRef<any>(null);
-  const initialDelay = index * 0.8; // Even faster cycling for more visibility
-  
-  useFrame(({ clock }) => {
-    if (textRef.current && textRef.current.material) {
-      const t = clock.getElapsedTime() - initialDelay;
-      if (t < 0) return;
-
-      // Animation cycle: 0-1 fade in, 1-4 visible, 4-5 fade out, 5-6 invisible, repeat
-      const cycle = 6;
-      const time = (t % cycle);
-      
-      let opacity = 0;
-      if (time < 1) opacity = time; // fade in
-      else if (time < 4) opacity = 1; // visible longer
-      else if (time < 5) opacity = 1 - (time - 4); // fade out
-      
-      // Make text more visible with higher opacity
-      if ('opacity' in textRef.current.material) {
-        textRef.current.material.opacity = opacity;
-      }
-
-      // Add a slight floating animation
-      if (textRef.current.position) {
-        textRef.current.position.y += Math.sin(t * 2) * 0.003;
-      }
-    }
-  });
-  
-  const { symbol, price } = data;
-  // Even brighter colors with more contrast
-  const color = price.startsWith('+') ? '#00FF00' : '#FF0000';
-
-  return (
-    <Text
-      ref={textRef}
-      position={position}
-      fontSize={2.0} // Even larger text
-      color={color}
-      anchorX="center"
-      anchorY="middle"
-      material-transparent={true}
-      material-opacity={0}
-      fontWeight={900} // Maximum boldness
-      outlineWidth={0.12} // Thicker outline
-      outlineColor="#000000"
-    >
-      {`${symbol}: ${price}`}
-    </Text>
   );
 }
 
@@ -184,25 +111,6 @@ function Scene() {
         frequency={9}
         thickness={4}
       />
-
-      {/* Spread out stock prices for better visibility - orbital arrangement */}
-      {STOCK_DATA.map((data, index) => {
-        const angle = (index / STOCK_DATA.length) * Math.PI * 2;
-        const radius = 9; // Fixed radius for more consistent placement
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
-        const z = 10; // Position much further in front for better visibility
-        
-        return (
-          <StockPrice
-            key={data.symbol}
-            position={[x, y, z]}
-            data={data}
-            index={index}
-            delay={index}
-          />
-        );
-      })}
     </>
   );
 }
