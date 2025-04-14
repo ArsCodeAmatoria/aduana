@@ -120,6 +120,29 @@ export default function DocsLayout({
                     </div>
                   ))}
                 </nav>
+                
+                <div className="mt-8 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 text-center">
+                    Built by{" "}
+                    <a 
+                      href="https://github.com/ArsCodeAmatoria" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      Ars Code Amatoria
+                    </a>
+                    <br/>
+                    <a 
+                      href="https://www.arscode.org/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      arscode.org
+                    </a>
+                  </p>
+                </div>
               </div>
             </aside>
             

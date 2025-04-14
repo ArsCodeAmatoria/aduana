@@ -212,4 +212,10 @@ The Aduana platform connects importers, exporters, and regulators through a dece
 4. Derivatives for tariff hedging
 5. DAO governance for dispute resolution and protocol updates
 
-See the documentation section for detailed architectural diagrams. 
+See the documentation section for detailed architectural diagrams.
+
+## Attribution
+
+This project was built and is maintained by [Ars Code Amatoria](https://github.com/ArsCodeAmatoria), specialists in blockchain security and Rust development.
+
+Visit [arscode.org](https://www.arscode.org/) for more information about our services and other projects. 
