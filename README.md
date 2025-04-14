@@ -79,9 +79,9 @@ The blockchain runtime is built using Substrate's FRAME framework with custom pa
 - ZK proofs for validating country of origin and tariff classification
 - Cross-chain identity resolution
 
-## Development Roadmap 📈
+## Development Roadmap
 
-### Completed ✅
+### Completed
 - **Project Initialization and Setup**
   - Initial repository structure
   - Frontend scaffolding with Next.js
@@ -113,7 +113,7 @@ The blockchain runtime is built using Substrate's FRAME framework with custom pa
   - Development of benchmarking documentation and guidelines
   - Implementation patterns for pallet benchmarks
 
-### In Progress 🔄
+### In Progress
 - **Pallet Refinement**
   - Optimization of pallet implementations
   - Extended test coverage
@@ -129,7 +129,7 @@ The blockchain runtime is built using Substrate's FRAME framework with custom pa
   - Integration of frontend with Substrate backend
   - Transaction flow implementation
 
-### Upcoming 📅
+### Upcoming
 - **Q4 2023: Performance Benchmarking**
   - Implementation of benchmarking for all pallets
   - Weight optimization
