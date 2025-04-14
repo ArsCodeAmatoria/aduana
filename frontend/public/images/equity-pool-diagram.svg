@@ -1,0 +1,93 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#f8fafc" />
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial" font-size="24" font-weight="bold" fill="#1e293b" text-anchor="middle">Equity Pool Structure</text>
+  
+  <!-- Main Pool Circle -->
+  <circle cx="400" cy="200" r="120" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" />
+  <text x="400" y="200" font-family="Arial" font-size="20" font-weight="bold" fill="#1e40af" text-anchor="middle">Equity Pool</text>
+  <text x="400" y="225" font-family="Arial" font-size="14" fill="#1e40af" text-anchor="middle">Shared Reserve</text>
+  
+  <!-- Pool Components -->
+  <circle cx="400" cy="120" r="40" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5" />
+  <text x="400" y="115" font-family="Arial" font-size="12" font-weight="bold" fill="#1e40af" text-anchor="middle">Governance</text>
+  <text x="400" y="130" font-family="Arial" font-size="10" fill="#1e40af" text-anchor="middle">Module</text>
+  
+  <circle cx="490" cy="200" r="40" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5" />
+  <text x="490" y="195" font-family="Arial" font-size="12" font-weight="bold" fill="#1e40af" text-anchor="middle">Claims</text>
+  <text x="490" y="210" font-family="Arial" font-size="10" fill="#1e40af" text-anchor="middle">System</text>
+  
+  <circle cx="400" cy="280" r="40" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5" />
+  <text x="400" y="275" font-family="Arial" font-size="12" font-weight="bold" fill="#1e40af" text-anchor="middle">Risk</text>
+  <text x="400" y="290" font-family="Arial" font-size="10" fill="#1e40af" text-anchor="middle">Model</text>
+  
+  <circle cx="310" cy="200" r="40" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5" />
+  <text x="310" y="195" font-family="Arial" font-size="12" font-weight="bold" fill="#1e40af" text-anchor="middle">Membership</text>
+  <text x="310" y="210" font-family="Arial" font-size="10" fill="#1e40af" text-anchor="middle">Tokens</text>
+  
+  <!-- Members -->
+  <g>
+    <!-- Member 1 -->
+    <circle cx="160" cy="100" r="30" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5" />
+    <text x="160" y="105" font-family="Arial" font-size="12" font-weight="bold" fill="#4338ca" text-anchor="middle">Member A</text>
+    
+    <!-- Connection to pool -->
+    <line x1="185" y1="115" x2="280" y2="186" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" />
+    <circle cx="278" cy="184" r="5" fill="#6366f1" />
+  </g>
+  
+  <g>
+    <!-- Member 2 -->
+    <circle cx="120" cy="200" r="30" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5" />
+    <text x="120" y="205" font-family="Arial" font-size="12" font-weight="bold" fill="#4338ca" text-anchor="middle">Member B</text>
+    
+    <!-- Connection to pool -->
+    <line x1="150" y1="200" x2="280" y2="200" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" />
+    <circle cx="278" cy="200" r="5" fill="#6366f1" />
+  </g>
+  
+  <g>
+    <!-- Member 3 -->
+    <circle cx="160" cy="300" r="30" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5" />
+    <text x="160" y="305" font-family="Arial" font-size="12" font-weight="bold" fill="#4338ca" text-anchor="middle">Member C</text>
+    
+    <!-- Connection to pool -->
+    <line x1="185" y1="285" x2="280" y2="214" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" />
+    <circle cx="278" cy="216" r="5" fill="#6366f1" />
+  </g>
+  
+  <!-- External Systems -->
+  <g>
+    <!-- Customs System -->
+    <rect x="640" y="120" width="120" height="50" rx="5" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" />
+    <text x="700" y="150" font-family="Arial" font-size="12" font-weight="bold" fill="#166534" text-anchor="middle">Customs System</text>
+    
+    <!-- Connection to pool -->
+    <line x1="640" y1="145" x2="520" y2="180" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" />
+    <circle cx="522" cy="178" r="5" fill="#22c55e" />
+  </g>
+  
+  <g>
+    <!-- Payment System -->
+    <rect x="640" y="230" width="120" height="50" rx="5" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" />
+    <text x="700" y="260" font-family="Arial" font-size="12" font-weight="bold" fill="#166534" text-anchor="middle">Payment System</text>
+    
+    <!-- Connection to pool -->
+    <line x1="640" y1="255" x2="520" y2="220" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" />
+    <circle cx="522" cy="222" r="5" fill="#22c55e" />
+  </g>
+  
+  <!-- Legends -->
+  <rect x="100" y="350" width="20" height="20" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5" />
+  <text x="130" y="365" font-family="Arial" font-size="12" fill="#4338ca">Pool Members</text>
+  
+  <rect x="250" y="350" width="20" height="20" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5" />
+  <text x="280" y="365" font-family="Arial" font-size="12" fill="#1e40af">Pool Components</text>
+  
+  <rect x="400" y="350" width="20" height="20" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" />
+  <text x="430" y="365" font-family="Arial" font-size="12" fill="#1e40af">Pool Reserve</text>
+  
+  <rect x="550" y="350" width="20" height="20" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" />
+  <text x="580" y="365" font-family="Arial" font-size="12" fill="#166534">External Systems</text>
+</svg> 

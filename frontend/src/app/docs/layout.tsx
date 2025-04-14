@@ -13,12 +13,14 @@ export default function DocsLayout({
   const pathname = usePathname()
   
   const sidebarItems = [
+    { href: '/docs/getting-started', title: 'Getting Started' },
     { href: '/docs/overview', title: 'Overview' },
     { href: '/docs/zk-origin-proofs', title: 'ZK Origin Proofs' },
     { href: '/docs/equity-pools', title: 'Equity Pools' },
     { href: '/docs/dao-governance', title: 'DAO Governance' },
     { href: '/docs/smart-contracts', title: 'Smart Contracts' },
     { href: '/docs/interoperability', title: 'Interoperability' },
+    { href: '/docs/token-economics', title: 'Token Economics' },
   ]
   
   return (
