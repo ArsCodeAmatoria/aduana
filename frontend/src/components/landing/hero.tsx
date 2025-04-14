@@ -8,27 +8,27 @@ import { WaveAnimation } from "../three/WaveAnimation"
 export function Hero() {
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-slate-900 pt-24 md:pt-28">
-      {/* ThreeJS Animation Background */}
-      <div className="absolute inset-0 z-0">
+      {/* ThreeJS Animation Background - Place behind content but above background */}
+      <div className="absolute inset-0 z-5">
         <WaveAnimation />
       </div>
       
-      {/* Semi-transparent gradient overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 to-slate-900/80 z-10"></div>
+      {/* Semi-transparent gradient overlay for better text readability - reduced opacity */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 to-slate-900/70 z-10"></div>
       
-      {/* Background gradients instead of images */}
+      {/* Background gradients at the bottom layer */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-slate-900/90" />
-        <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 to-slate-900/70" />
+        <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
       </div>
       
-      {/* Content with higher z-index */}
+      {/* Content with highest z-index */}
       <div className="container relative z-20 px-4 md:px-6 mx-auto flex flex-col items-center text-center">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto backdrop-blur-sm bg-slate-900/30 p-8 rounded-2xl border border-slate-700/50"
         >
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200">
             Transforming International Trade Through Blockchain
@@ -56,7 +56,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
         >
           <div className="w-8 h-8 border-b-2 border-r-2 border-blue-400 transform rotate-45"></div>
         </motion.div>
