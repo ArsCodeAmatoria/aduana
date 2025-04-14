@@ -14,12 +14,12 @@ export function Navbar() {
   }
 
   const navItems = [
-    { label: "Home", href: "#" },
-    { label: "Overview", href: "#overview" },
-    { label: "ZK Proofs", href: "#zkproofs" },
-    { label: "Insurance", href: "#insurance" },
-    { label: "Derivatives", href: "#derivatives" },
-    { label: "Token", href: "#token" },
+    { label: "Home", href: "/" },
+    { label: "Overview", href: "/#overview" },
+    { label: "ZK Proofs", href: "/#zkproofs" },
+    { label: "Insurance", href: "/#insurance" },
+    { label: "Derivatives", href: "/#derivatives" },
+    { label: "Token", href: "/#token" },
     { label: "Docs", href: "/docs" },
   ]
 
