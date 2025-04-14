@@ -79,83 +79,83 @@ The blockchain runtime is built using Substrate's FRAME framework with custom pa
 - ZK proofs for validating country of origin and tariff classification
 - Cross-chain identity resolution
 
-## Development Roadmap
+## Development Roadmap 📈
 
-### Completed
-- ✅ **Project Initialization and Setup**
+### Completed ✅
+- **Project Initialization and Setup**
   - Initial repository structure
   - Frontend scaffolding with Next.js
   - Substrate runtime base configuration
 
-- ✅ **Frontend UI Development**
+- **Frontend UI Development**
   - Landing page and whitepaper UI components
   - Economic model visualizations
   - Responsive design implementation
   - Animation and interaction implementation
 
-- ✅ **Documentation System**
+- **Documentation System**
   - Custom documentation layout with sidebar navigation
   - Implementation of comprehensive documentation pages
   - Integration of diagrams and technical specifications
 
-- ✅ **Substrate Pallet Prototypes**
+- **Substrate Pallet Prototypes**
   - Core pallet functionality implementation
   - Storage structures and extrinsics definition
   - Unit and integration testing
   - Documentation for pallets
 
-- ✅ **Integration Tests**
+- **Integration Tests**
   - Comprehensive integration test framework
   - Cross-pallet interaction testing
   - Documentation for test methodology
 
-- ✅ **Benchmarking Framework**
+- **Benchmarking Framework**
   - Development of benchmarking documentation and guidelines
   - Implementation patterns for pallet benchmarks
 
-### In Progress
-- 🔄 **Pallet Refinement**
+### In Progress 🔄
+- **Pallet Refinement**
   - Optimization of pallet implementations
   - Extended test coverage
   - Error handling enhancement
 
-- 🔄 **Runtime Integration**
+- **Runtime Integration**
   - Integration of pallets into main runtime
   - Configuration for parachain deployment
   - XCM integration for cross-chain messaging
 
-- 🔄 **Frontend-Backend Integration**
+- **Frontend-Backend Integration**
   - Development of API endpoints
   - Integration of frontend with Substrate backend
   - Transaction flow implementation
 
-### Upcoming
-- 📅 **Q4 2023: Performance Benchmarking**
+### Upcoming 📅
+- **Q4 2023: Performance Benchmarking**
   - Implementation of benchmarking for all pallets
   - Weight optimization
   - Performance testing under load
 
-- 📅 **Q1 2024: Security Audits**
+- **Q1 2024: Security Audits**
   - Comprehensive security review
   - Penetration testing
   - Bug bounty program
 
-- 📅 **Q1 2024: Testnet Deployment**
+- **Q1 2024: Testnet Deployment**
   - Deployment to Kusama testnet
   - Initial user testing
   - Performance monitoring
 
-- 📅 **Q2 2024: POP Integration**
+- **Q2 2024: POP Integration**
   - Integration with Proof of Provenance system
   - ZK proof verification implementation
   - Cross-chain identity resolution
 
-- 📅 **Q3 2024: Mainnet Preparation**
+- **Q3 2024: Mainnet Preparation**
   - Final optimizations
   - Economic parameter calibration
   - Governance framework finalization
 
-- 📅 **Q4 2024: Mainnet Launch**
+- **Q4 2024: Mainnet Launch**
   - Kusama parachain auction
   - Public launch
   - Community onboarding
