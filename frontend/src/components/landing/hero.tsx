@@ -67,14 +67,21 @@ export function Hero() {
           const angle = (index / STOCK_DATA.length) * Math.PI * 2;
           
           // Determine position based on angle to avoid center area
-          let radius = 42; // Larger radius to push further out
+          let radius = 42; // Base radius to push out
+          
+          // Push left side items further left, right side items further right
+          if (Math.cos(angle) < 0) {
+            // Left side - push further left (larger negative cos value)
+            radius = 52;
+          }
+          
           let left = 50 + Math.cos(angle) * radius;
           let top = 50 + Math.sin(angle) * radius;
           
           // Adjust vertical positions to avoid center
           if (top > 30 && top < 70) {
-            // If in middle vertical area, push further left/right
-            radius = 48; // Even larger radius for middle items
+            // If in middle vertical area, push even further out
+            radius = Math.cos(angle) < 0 ? 60 : 48; // Even larger radius for middle items
             left = 50 + Math.cos(angle) * radius;
           }
           
