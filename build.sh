@@ -39,6 +39,12 @@ cd runtime/pallets/synthetic_market
 cargo check
 cd ../../..
 
+# Build the DUANA token pallet
+echo "Building duana_token pallet..."
+cd runtime/pallets/duana_token
+cargo check
+cd ../../..
+
 # Build the main runtime
 echo "Building runtime..."
 cd runtime
