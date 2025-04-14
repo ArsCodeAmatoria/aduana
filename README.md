@@ -5,8 +5,12 @@ Aduana is a hybrid Kusama + POP-based parachain project that mitigates internati
 ## Project Structure
 
 - **frontend/**: Next.js application with Tailwind CSS, Shadcn UI, Framer Motion, and Chart.js
-- **docs/**: Documentation site built with Fumadocs
+  - **src/app/docs/**: Integrated documentation section with custom components
+  - **src/components/**: UI components for the platform
+  - **public/**: Static assets including images and diagrams
 - **runtime/**: Substrate-based blockchain implementation with custom pallets
+  - **pallets/**: Core blockchain functionality implemented as Substrate pallets
+  - **src/**: Main runtime configuration and integration
 
 ## Features
 
@@ -23,8 +27,9 @@ Aduana mitigates international trade tariffs through decentralized origin verifi
 - Insurance pool allocations, tariff savings, and DAO dispute resolution metrics
 
 ### Documentation
-- Comprehensive documentation built with Fumadocs
+- Comprehensive documentation integrated directly in the Next.js application
 - Detailed information on ZK origin proofs, equity pools, DAO governance, and more
+- Custom documentation layout with sidebar navigation
 
 ### Rust Backend Modules (Substrate Pallets)
 - `origin_verifier`: Integrates with POP and verifies shipment proof-of-origin
@@ -46,17 +51,25 @@ npm install
 npm run dev
 ```
 
-### Documentation Development
-```bash
-cd docs
-npm install
-npm run dev
-```
-
 ### Substrate Runtime Development
 ```bash
-cd runtime
-# Setup instructions for Substrate development
+./build.sh
+```
+
+Or for individual components:
+
+```bash
+cd runtime/pallets/[pallet_name]
+cargo check
+```
+
+## Testing
+
+Each pallet includes unit tests that can be run with:
+
+```bash
+cd runtime/pallets/[pallet_name]
+cargo test
 ```
 
 ## Deployment
