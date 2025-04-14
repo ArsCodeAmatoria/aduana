@@ -130,32 +130,32 @@ The blockchain runtime is built using Substrate's FRAME framework with custom pa
   - Transaction flow implementation
 
 ### Upcoming
-- **Q4 2023: Performance Benchmarking**
+- **Q2 2025: Performance Benchmarking**
   - Implementation of benchmarking for all pallets
   - Weight optimization
   - Performance testing under load
 
-- **Q1 2024: Security Audits**
+- **Q3 2025: Security Audits**
   - Comprehensive security review
   - Penetration testing
   - Bug bounty program
 
-- **Q1 2024: Testnet Deployment**
+- **Q3 2025: Testnet Deployment**
   - Deployment to Kusama testnet
   - Initial user testing
   - Performance monitoring
 
-- **Q2 2024: POP Integration**
+- **Q4 2025: POP Integration**
   - Integration with Proof of Provenance system
   - ZK proof verification implementation
   - Cross-chain identity resolution
 
-- **Q3 2024: Mainnet Preparation**
+- **Q1 2026: Mainnet Preparation**
   - Final optimizations
   - Economic parameter calibration
   - Governance framework finalization
 
-- **Q4 2024: Mainnet Launch**
+- **Q2 2026: Mainnet Launch**
   - Kusama parachain auction
   - Public launch
   - Community onboarding
