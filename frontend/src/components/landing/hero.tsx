@@ -14,7 +14,7 @@ export function Hero() {
       </div>
       
       {/* Semi-transparent gradient overlay for better text readability - reduced opacity */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 to-slate-900/70 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 to-slate-900/50 z-10"></div>
       
       {/* Background gradients at the bottom layer */}
       <div className="absolute inset-0 z-0">
