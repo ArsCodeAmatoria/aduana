@@ -60,14 +60,23 @@ export function Hero() {
         <WaveAnimation />
       </div>
       
-      {/* Stock price overlay - positioned above the waves */}
+      {/* Stock price overlay - positioned around hero content */}
       <div className="absolute inset-0 z-15 pointer-events-none">
         {STOCK_DATA.map((data, index) => {
-          // Calculate position for each stock price
+          // Calculate position for each stock price - arrange only around content area
           const angle = (index / STOCK_DATA.length) * Math.PI * 2;
-          const radius = 30; // Percentage of container
-          const left = 50 + Math.cos(angle) * radius; // Center + radius * cos(angle)
-          const top = 50 + Math.sin(angle) * radius; // Center + radius * sin(angle)
+          
+          // Determine position based on angle to avoid center area
+          let radius = 42; // Larger radius to push further out
+          let left = 50 + Math.cos(angle) * radius;
+          let top = 50 + Math.sin(angle) * radius;
+          
+          // Adjust vertical positions to avoid center
+          if (top > 30 && top < 70) {
+            // If in middle vertical area, push further left/right
+            radius = 48; // Even larger radius for middle items
+            left = 50 + Math.cos(angle) * radius;
+          }
           
           // Determine text color
           const color = data.price.startsWith('+') ? '#00FF00' : '#FF0000';
