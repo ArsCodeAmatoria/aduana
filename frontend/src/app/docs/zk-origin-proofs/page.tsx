@@ -1,68 +1,86 @@
+import { CodeBlock } from '@/components/ui/code-block';
+
 export default function ZkOriginProofsPage() {
   return (
-    <div className="prose max-w-none">
-      <h1>ZK Origin Proofs</h1>
+    <div className="prose max-w-none dark:text-slate-100">
+      <h1 className="text-3xl font-bold tracking-tight mb-6">ZK Origin Proofs</h1>
       
-      <p>
-        Zero-Knowledge Origin Proofs are at the core of Aduana's capability to verify product origins without revealing sensitive supply chain data, enabling trust in international trade while preserving business confidentiality.
-      </p>
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl mb-10 border border-blue-100 dark:border-blue-800">
+        <p className="text-xl text-blue-800 dark:text-blue-200 leading-relaxed">
+          Zero-Knowledge Origin Proofs are at the core of Aduana's capability to verify product origins without revealing sensitive supply chain data, enabling trust in international trade while preserving business confidentiality.
+        </p>
+      </div>
       
-      <div className="bg-blue-50 p-6 rounded-lg my-6">
-        <h2 className="text-blue-800 font-semibold mt-0">What are ZK Origin Proofs?</h2>
-        <p className="text-blue-700">
+      <div className="bg-indigo-50 dark:bg-indigo-900/20 p-6 rounded-xl mb-10 border border-indigo-100 dark:border-indigo-800">
+        <h2 className="text-2xl font-semibold text-indigo-800 dark:text-indigo-300 mt-0 mb-4 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          What are ZK Origin Proofs?
+        </h2>
+        <p className="text-indigo-700 dark:text-indigo-300 mb-0">
           ZK Origin Proofs are cryptographic protocols that allow one party (the producer or exporter) to prove to another party (the customs authority or importer) that a product originated in a specific country or region, without revealing any additional information about the production process, suppliers, or other sensitive commercial details.
         </p>
       </div>
       
-      <h2>Key Benefits</h2>
+      <h2 className="text-2xl font-bold mt-12 mb-6 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        Key Benefits
+      </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
-        <div className="p-5 bg-slate-50 rounded-lg">
-          <h3 className="font-semibold mb-2">Privacy Preservation</h3>
-          <p className="text-slate-600 text-sm">
+        <div className="p-5 bg-white dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+          <div className="flex items-center mb-3">
+            <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-full mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+              </svg>
+            </div>
+            <h3 className="font-semibold mb-0">Privacy Preservation</h3>
+          </div>
+          <p className="text-slate-600 dark:text-slate-300 text-sm mb-0">
             Businesses can prove regulatory compliance without exposing proprietary information about their supply chain, manufacturing processes, or business relationships.
           </p>
         </div>
-        <div className="p-5 bg-slate-50 rounded-lg">
-          <h3 className="font-semibold mb-2">Tamper-Proof Verification</h3>
-          <p className="text-slate-600 text-sm">
+        <div className="p-5 bg-white dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+          <div className="flex items-center mb-3">
+            <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-full mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="font-semibold mb-0">Tamper-Proof Verification</h3>
+          </div>
+          <p className="text-slate-600 dark:text-slate-300 text-sm mb-0">
             Cryptographic guarantees ensure that origin claims cannot be falsified, reducing fraud and improving trust in origin declarations.
           </p>
         </div>
-        <div className="p-5 bg-slate-50 rounded-lg">
-          <h3 className="font-semibold mb-2">Regulatory Compliance</h3>
-          <p className="text-slate-600 text-sm">
+        <div className="p-5 bg-white dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+          <div className="flex items-center mb-3">
+            <div className="bg-amber-100 dark:bg-amber-900/30 p-2 rounded-full mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            </div>
+            <h3 className="font-semibold mb-0">Regulatory Compliance</h3>
+          </div>
+          <p className="text-slate-600 dark:text-slate-300 text-sm mb-0">
             Authorities can verify that products meet origin requirements for preferential tariff treatment without manual inspection of sensitive documents.
           </p>
         </div>
       </div>
       
-      <h2>Technical Architecture</h2>
+      <h2 className="text-2xl font-bold mt-12 mb-6 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+        </svg>
+        Technical Architecture
+      </h2>
       
-      <div className="my-6">
-        <img src="/images/zk-proof-flow.svg" alt="ZK Proof Flow Diagram" className="w-full rounded-lg shadow-md" />
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-        <div>
-          <h3>ZK Circuit Components</h3>
-          <ol className="list-decimal pl-5 space-y-2">
-            <li><strong>Input Preparation</strong>: Raw supply chain data and origin criteria</li>
-            <li><strong>Witness Generation</strong>: Creation of private inputs (witness) and public inputs</li>
-            <li><strong>Proving System</strong>: Generation of cryptographic proof using zkSNARKs</li>
-            <li><strong>Verification</strong>: On-chain verification of proof validity</li>
-          </ol>
-        </div>
-        <div>
-          <h3>Proof Generation Flow</h3>
-          <ol className="list-decimal pl-5 space-y-2">
-            <li>Exporter collects supply chain data</li>
-            <li>Data is processed through rules engine to confirm eligibility</li>
-            <li>zkSNARK circuit generates a proof of origin compliance</li>
-            <li>Proof is submitted to Aduana's verification pallet</li>
-            <li>Verification result is recorded on-chain</li>
-          </ol>
-        </div>
+      <div className="my-6 p-1 bg-white dark:bg-slate-800 rounded-lg shadow-md border border-slate-200 dark:border-slate-700">
+        <img src="/images/zk-proof-flow.svg" alt="ZK Proof Flow Diagram" className="w-full rounded-lg" />
       </div>
       
       <h2>Origin Rules Implementation</h2>
@@ -111,9 +129,9 @@ export default function ZkOriginProofsPage() {
         Aduana's ZK circuits are built using cutting-edge cryptographic primitives:
       </p>
       
-      <pre className="bg-slate-900 text-slate-50 p-4 rounded-md overflow-x-auto my-6">
-        <code>
-{`// Simplified representation of the Origin Verification Circuit
+      <CodeBlock
+        language="javascript"
+        value={`// Simplified representation of the Origin Verification Circuit
 
 function buildOriginVerificationCircuit(inputs) {
   // Private inputs (not revealed)
@@ -150,8 +168,8 @@ function buildOriginVerificationCircuit(inputs) {
     verified: originVerified
   };
 }`}
-        </code>
-      </pre>
+        showLineNumbers={true}
+      />
       
       <div className="my-6 p-6 border border-slate-200 rounded-lg">
         <h3 className="font-semibold mb-4">ZK Libraries and Tools</h3>
