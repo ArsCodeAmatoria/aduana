@@ -47,7 +47,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             <Button 
               variant="outline" 
-              className="border-blue-400/50 border-2 text-white hover:bg-blue-500/20 hover:text-white"
+              className="bg-slate-700/80 border-blue-400 text-blue-300 hover:bg-slate-600/80 hover:text-blue-200"
             >
               Connect
             </Button>
@@ -91,7 +91,7 @@ export function Navbar() {
               <div className="flex flex-col space-y-3 pt-4 border-t border-slate-800">
                 <Button 
                   variant="outline" 
-                  className="border-blue-400/50 border-2 text-white hover:bg-blue-500/20 hover:text-white w-full"
+                  className="bg-slate-700/80 border-blue-400 text-blue-300 hover:bg-slate-600/80 hover:text-blue-200 w-full"
                 >
                   Connect
                 </Button>
