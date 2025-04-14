@@ -151,6 +151,12 @@ function StockPrice({ position, data, index, delay }: StockPriceProps) {
 
 // Main scene component
 function Scene() {
+  // Debug log to verify the scene is being created
+  useEffect(() => {
+    console.log("Three.js Scene mounted");
+    return () => console.log("Three.js Scene unmounted");
+  }, []);
+
   return (
     <>
       <PerspectiveCamera makeDefault position={[0, 0, 15]} />
@@ -205,8 +211,13 @@ function Scene() {
 
 // Main export component
 export function WaveAnimation() {
+  useEffect(() => {
+    console.log("WaveAnimation component mounted");
+    return () => console.log("WaveAnimation component unmounted");
+  }, []);
+
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 w-full h-full z-10">
       <Canvas dpr={[1, 2]} style={{ background: 'transparent' }}>
         <Scene />
       </Canvas>
