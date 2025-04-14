@@ -98,8 +98,8 @@ export function Hero() {
         })}
       </div>
       
-      {/* Semi-transparent gradient overlay - very low opacity to show more of the animation */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/30 to-slate-900/40 z-10"></div>
+      {/* Semi-transparent gradient overlay - slightly darker for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 to-slate-900/50 z-10"></div>
       
       {/* Background gradients at the bottom layer */}
       <div className="absolute inset-0 z-0">
@@ -113,7 +113,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto backdrop-blur-sm bg-slate-900/40 p-8 rounded-2xl border border-slate-700/50"
+          className="max-w-4xl mx-auto"
         >
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200">
             Transforming International Trade Through Blockchain
