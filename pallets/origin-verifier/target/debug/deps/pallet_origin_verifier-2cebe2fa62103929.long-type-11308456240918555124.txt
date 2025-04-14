@@ -1,0 +1,1 @@
+frame_support::pallet_prelude::StorageMap<_GeneratedPrefixForStoragePendingVerifications<T>, frame_support::Blake2_128Concat, frame_benchmarking::Vec<u8>, frame_benchmarking::Vec<u8>>

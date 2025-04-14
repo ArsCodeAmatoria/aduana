@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Download, GitMerge } from "lucide-react"
+import Link from "next/link"
 
 export function CallToAction() {
   return (
@@ -39,9 +40,11 @@ export function CallToAction() {
               <p className="text-slate-300 mb-6">
                 Get the comprehensive technical overview of Aduana's architecture, token economics, and roadmap.
               </p>
-              <Button size="lg" className="w-full bg-blue-600 hover:bg-blue-700">
-                Download PDF
-              </Button>
+              <Link href="/documents/aduana_whitepaper.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
+                <Button size="lg" className="w-full bg-blue-600 hover:bg-blue-700">
+                  Download PDF
+                </Button>
+              </Link>
             </div>
           </motion.div>
           

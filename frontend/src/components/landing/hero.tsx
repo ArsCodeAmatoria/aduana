@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { GlobeIcon, PackageIcon, CreditCardIcon, GaugeIcon } from "lucide-react"
+import Link from "next/link"
 
 export function Hero() {
   return (
@@ -28,9 +29,11 @@ export function Hero() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-            Download Whitepaper
-          </Button>
+          <Link href="/documents/aduana_whitepaper.pdf" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+              Download Whitepaper
+            </Button>
+          </Link>
           <Button size="lg" variant="outline" className="border-slate-400 text-white hover:bg-slate-700">
             Join Developer Waitlist
           </Button>

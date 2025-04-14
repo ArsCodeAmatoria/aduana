@@ -1,0 +1,10 @@
+/Users/kojinfox/aduana/pallets/origin-verifier/target/debug/deps/libsp_metadata_ir-77865b23dedbf46e.rmeta: /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/lib.rs /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/types.rs /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/v14.rs /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/v15.rs
+
+/Users/kojinfox/aduana/pallets/origin-verifier/target/debug/deps/libsp_metadata_ir-77865b23dedbf46e.rlib: /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/lib.rs /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/types.rs /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/v14.rs /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/v15.rs
+
+/Users/kojinfox/aduana/pallets/origin-verifier/target/debug/deps/sp_metadata_ir-77865b23dedbf46e.d: /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/lib.rs /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/types.rs /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/v14.rs /Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/v15.rs
+
+/Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/lib.rs:
+/Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/types.rs:
+/Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/v14.rs:
+/Users/kojinfox/.cargo/git/checkouts/substrate-ef701c1d76c9f8aa/ff24c60/primitives/metadata-ir/src/v15.rs:

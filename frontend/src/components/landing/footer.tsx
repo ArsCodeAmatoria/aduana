@@ -2,6 +2,7 @@
 
 import React from "react"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 export function Footer() {
   return (
@@ -27,7 +28,7 @@ export function Footer() {
             <h4 className="text-sm font-semibold text-white">Resources</h4>
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Whitepaper</a></li>
+              <li><Link href="/documents/aduana_whitepaper.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Whitepaper</Link></li>
               <li><a href="#" className="hover:text-white transition-colors">Developer Portal</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Community</a></li>
             </ul>
@@ -45,7 +46,7 @@ export function Footer() {
         
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-slate-500 mb-4 md:mb-0">
-            © 2024 Aduana. All rights reserved.
+            © 2025 Aduana. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a href="#" className="text-sm text-slate-500 hover:text-white transition-colors">Privacy Policy</a>

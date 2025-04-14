@@ -44,9 +44,26 @@ sp-std = { version = "5.0.0", default-features = false, git = "https://github.co
 sp-transaction-pool = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.39" }
 sp-version = { version = "5.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.39" }
 
+# Polkadot dependencies
+xcm = { version = "1.0.0", default-features = false, git = "https://github.com/paritytech/polkadot.git", branch = "release-v1.0.0" }
+xcm-executor = { version = "1.0.0", default-features = false, git = "https://github.com/paritytech/polkadot.git", branch = "release-v1.0.0" }
+xcm-builder = { version = "1.0.0", default-features = false, git = "https://github.com/paritytech/polkadot.git", branch = "release-v1.0.0" }
+pallet-xcm = { version = "1.0.0", default-features = false, git = "https://github.com/paritytech/polkadot.git", branch = "release-v1.0.0" }
+polkadot-parachain = { version = "1.0.0", default-features = false, git = "https://github.com/paritytech/polkadot.git", branch = "release-v1.0.0" }
+
+# ZK proof libraries
+ark-ff = { version = "0.4.0", default-features = false }
+ark-ec = { version = "0.4.0", default-features = false }
+ark-bls12-381 = { version = "0.4.0", default-features = false, features = ["curve"] }
+ark-serialize = { version = "0.4.0", default-features = false }
+ark-groth16 = { version = "0.4.0", default-features = false }
+
 # Local dependencies
 pallet-origin-verifier = { version = "0.1.0", default-features = false, path = "pallets/origin_verifier" }
 pallet-insurance-pool = { version = "0.1.0", default-features = false, path = "pallets/insurance_pool" }
+pallet-tariff-logic = { version = "0.1.0", default-features = false, path = "pallets/tariff_logic" }
+pallet-synthetic-market = { version = "0.1.0", default-features = false, path = "pallets/synthetic_market" }
+pallet-duana-token = { version = "0.1.0", default-features = false, path = "pallets/duana_token" }
 
 [features]
 default = ["std"]
@@ -78,6 +95,19 @@ std = [
     "sp-version/std",
     "pallet-origin-verifier/std",
     "pallet-insurance-pool/std",
+    "pallet-tariff-logic/std",
+    "pallet-synthetic-market/std",
+    "pallet-duana-token/std",
+    "xcm/std",
+    "xcm-executor/std",
+    "xcm-builder/std",
+    "pallet-xcm/std",
+    "polkadot-parachain/std",
+    "ark-ff/std",
+    "ark-ec/std",
+    "ark-bls12-381/std",
+    "ark-serialize/std",
+    "ark-groth16/std",
 ]
 runtime-benchmarks = [
     "frame-benchmarking/runtime-benchmarks",
