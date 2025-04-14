@@ -84,21 +84,21 @@ function Wave({ position, color, speed, amplitude, frequency, thickness = 5 }: W
 // Stock price element with better visibility
 function StockPrice({ position, data, index, delay }: StockPriceProps) {
   const textRef = useRef<any>(null);
-  const initialDelay = index * 1.2; // Faster cycling of stock prices
+  const initialDelay = index * 0.8; // Even faster cycling for more visibility
   
   useFrame(({ clock }) => {
     if (textRef.current && textRef.current.material) {
       const t = clock.getElapsedTime() - initialDelay;
       if (t < 0) return;
 
-      // Animation cycle: 0-1 fade in, 1-3 visible, 3-4 fade out, 4-5 invisible, repeat
-      const cycle = 5;
+      // Animation cycle: 0-1 fade in, 1-4 visible, 4-5 fade out, 5-6 invisible, repeat
+      const cycle = 6;
       const time = (t % cycle);
       
       let opacity = 0;
       if (time < 1) opacity = time; // fade in
-      else if (time < 3) opacity = 1; // visible
-      else if (time < 4) opacity = 1 - (time - 3); // fade out
+      else if (time < 4) opacity = 1; // visible longer
+      else if (time < 5) opacity = 1 - (time - 4); // fade out
       
       // Make text more visible with higher opacity
       if ('opacity' in textRef.current.material) {
@@ -120,14 +120,14 @@ function StockPrice({ position, data, index, delay }: StockPriceProps) {
     <Text
       ref={textRef}
       position={position}
-      fontSize={1.2} // Much larger text
+      fontSize={2.0} // Even larger text
       color={color}
       anchorX="center"
       anchorY="middle"
       material-transparent={true}
       material-opacity={0}
-      fontWeight={800} // Bolder text
-      outlineWidth={0.05} // Add outline for better visibility
+      fontWeight={900} // Maximum boldness
+      outlineWidth={0.12} // Thicker outline
       outlineColor="#000000"
     >
       {`${symbol}: ${price}`}
@@ -139,7 +139,7 @@ function Scene() {
   return (
     <>
       <PerspectiveCamera makeDefault position={[0, 0, 20]} fov={60} />
-      <ambientLight intensity={1.0} />
+      <ambientLight intensity={1.2} /> {/* Brighter lighting */}
 
       {/* Brighter waves with increased visibility */}
       <Wave
@@ -188,10 +188,10 @@ function Scene() {
       {/* Spread out stock prices for better visibility - orbital arrangement */}
       {STOCK_DATA.map((data, index) => {
         const angle = (index / STOCK_DATA.length) * Math.PI * 2;
-        const radius = 10 + Math.random() * 3; // Larger radius
+        const radius = 9; // Fixed radius for more consistent placement
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
-        const z = -Math.random() * 2 - 2; // Push slightly further back
+        const z = 10; // Position much further in front for better visibility
         
         return (
           <StockPrice
@@ -199,7 +199,7 @@ function Scene() {
             position={[x, y, z]}
             data={data}
             index={index}
-            delay={index * 1.5}
+            delay={index}
           />
         );
       })}
@@ -216,7 +216,8 @@ export function WaveAnimation() {
         camera={{ position: [0, 0, 20], fov: 60 }}
         gl={{ 
           antialias: true, // Enable antialiasing for smoother lines
-          alpha: true
+          alpha: true,
+          preserveDrawingBuffer: true // Try this to help with rendering issues
         }}
       >
         <Scene />
