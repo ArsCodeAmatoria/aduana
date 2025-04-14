@@ -1,11 +1,15 @@
+import { CodeBlock } from '@/components/ui/code-block';
+
 export default function TokenEconomicsPage() {
   return (
-    <div className="prose max-w-none">
-      <h1>Token Economics</h1>
+    <div className="prose max-w-none dark:text-slate-100">
+      <h1 className="text-3xl font-bold tracking-tight mb-6">Token Economics</h1>
       
-      <p>
-        The DUANA token is the native utility and governance token of the Aduana platform. It facilitates operations within the ecosystem while creating aligned incentives for all participants in the international trade network.
-      </p>
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl mb-10 border border-blue-100 dark:border-blue-800">
+        <p className="text-xl text-blue-800 dark:text-blue-200 leading-relaxed">
+          The DUANA token is the native utility and governance token of the Aduana platform. It facilitates operations within the ecosystem while creating aligned incentives for all participants in the international trade network.
+        </p>
+      </div>
       
       <h2>Token Utility</h2>
       
@@ -381,6 +385,85 @@ export default function TokenEconomicsPage() {
           </div>
         </div>
       </div>
+      
+      <h2>Staking Rewards Distribution</h2>
+      
+      <p>
+        The distribution of staking rewards follows a well-defined formula to ensure fair allocation:
+      </p>
+      
+      <CodeBlock 
+        language="rust"
+        value={`// Simplified reward calculation in Rust
+fn calculate_staking_reward(
+    staked_amount: Balance,
+    staking_duration: Blocks,
+    tier_multiplier: Fixed,
+    network_inflation: Rate,
+) -> Balance {
+    let base_reward = staked_amount
+        .saturating_mul(network_inflation)
+        .saturating_div(BLOCKS_PER_YEAR);
+        
+    let duration_bonus = if staking_duration >= YEAR_LOCK {
+        FixedU128::from_rational(110, 100) // 10% bonus
+    } else if staking_duration >= HALF_YEAR_LOCK {
+        FixedU128::from_rational(105, 100) // 5% bonus
+    } else if staking_duration >= QUARTER_YEAR_LOCK {
+        FixedU128::from_rational(102, 100) // 2% bonus
+    } else {
+        FixedU128::from_rational(100, 100) // No bonus
+    };
+    
+    // Apply tier multiplier and duration bonus
+    let adjusted_reward = base_reward
+        .saturating_mul(tier_multiplier)
+        .saturating_mul(duration_bonus);
+        
+    adjusted_reward
+}`}
+        showLineNumbers={true}
+      />
+      
+      <h2>Governance Voting Power</h2>
+      
+      <p>
+        Voting power in the Aduana DAO is calculated based on token holdings and staking duration:
+      </p>
+      
+      <CodeBlock 
+        language="typescript"
+        value={`// Voting power calculation in TypeScript
+function calculateVotingPower(
+  tokenBalance: bigint,
+  stakedAmount: bigint,
+  stakingDuration: number, // in days
+  delegatedAmount: bigint = 0n
+): bigint {
+  // Base voting power from token holdings
+  const baseVotingPower = tokenBalance;
+  
+  // Staking multiplier based on duration
+  let stakingMultiplier = 10000n; // Base multiplier (1.0)
+  if (stakingDuration >= 365) {
+    stakingMultiplier = 20000n; // 2.0x for 1+ year
+  } else if (stakingDuration >= 180) {
+    stakingMultiplier = 15000n; // 1.5x for 6+ months
+  } else if (stakingDuration >= 90) {
+    stakingMultiplier = 12500n; // 1.25x for 3+ months
+  }
+  
+  // Calculate staking bonus
+  const stakingBonus = (stakedAmount * stakingMultiplier) / 10000n;
+  
+  // Add delegated voting power (at 80% efficiency)
+  const delegationBonus = (delegatedAmount * 8000n) / 10000n;
+  
+  // Total voting power
+  return baseVotingPower + stakingBonus + delegationBonus;
+}`}
+        showLineNumbers={true}
+      />
       
       <div className="mt-8 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
         <h3 className="font-semibold text-blue-800 mb-2">Token Economics Resources</h3>
