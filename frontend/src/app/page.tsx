@@ -10,16 +10,28 @@ import { Footer } from "@/components/landing/footer"
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-slate-900 text-white">
       <Navbar />
-      <Hero />
-      <Overview />
-      <ZkOriginProofs />
-      <DaoInsurance />
-      <SyntheticDerivatives />
-      <TokenUtility />
-      <CallToAction />
+      <main className="flex-1 flex flex-col relative">
+        {/* Background gradients */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div className="absolute w-[1000px] h-[1000px] -top-[400px] -right-[400px] bg-blue-500/10 rounded-full blur-3xl" />
+          <div className="absolute w-[1000px] h-[1000px] top-[40%] -left-[400px] bg-indigo-500/10 rounded-full blur-3xl" />
+          <div className="absolute w-[1000px] h-[1000px] -bottom-[400px] -right-[300px] bg-blue-500/5 rounded-full blur-3xl" />
+        </div>
+
+        {/* Content Sections */}
+        <div className="relative z-10">
+          <Hero />
+          <Overview />
+          <ZkOriginProofs />
+          <DaoInsurance />
+          <SyntheticDerivatives />
+          <TokenUtility />
+          <CallToAction />
+        </div>
+      </main>
       <Footer />
-    </main>
+    </div>
   )
 }
