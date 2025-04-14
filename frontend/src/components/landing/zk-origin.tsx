@@ -171,33 +171,60 @@ export function ZkOriginProofs() {
                       transition={{ duration: 1 }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <div className="text-center">
-                        <div className="flex justify-center">
-                          <div className="relative">
-                            <EyeOff size={64} className="text-indigo-400 mb-4" />
-                            <motion.div 
-                              animate={{ 
-                                opacity: [0, 0.8, 0],
-                                scale: [1, 1.5, 1] 
-                              }}
-                              transition={{ 
-                                duration: 2, 
-                                repeat: Infinity,
-                                repeatType: "loop"
-                              }}
-                              className="absolute inset-0 rounded-full bg-indigo-400/20 blur-md"
-                            />
+                      {/* Improved ZK Proof Visualization */}
+                      <div className="text-center w-full">
+                        <div className="flex justify-between items-center mb-6 px-4">
+                          <div className="text-center">
+                            <div className="bg-blue-600/20 p-3 rounded-full mb-2">
+                              <Shield size={28} className="text-blue-400" />
+                            </div>
+                            <p className="text-sm text-blue-300">Exporter</p>
+                          </div>
+                          
+                          <div className="h-0.5 flex-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-2"></div>
+                          
+                          <div className="text-center">
+                            <div className="bg-indigo-600/20 p-3 rounded-full mb-2">
+                              <CheckCircle size={28} className="text-indigo-400" />
+                            </div>
+                            <p className="text-sm text-indigo-300">Importer</p>
                           </div>
                         </div>
-                        <h4 className="text-xl font-semibold text-white mb-2">Private Data</h4>
-                        <div className="flex justify-center space-x-2 mt-4">
-                          <div className="w-16 h-3 rounded-full bg-slate-700"></div>
-                          <div className="w-10 h-3 rounded-full bg-slate-700"></div>
-                          <div className="w-20 h-3 rounded-full bg-slate-700"></div>
+                        
+                        {/* Data flow visualization */}
+                        <div className="flex items-center justify-center relative">
+                          <div className="bg-slate-800 rounded-lg p-3 w-full max-w-[220px]">
+                            <div className="font-mono text-xs text-left mb-1 text-slate-300">
+                              <span className="text-blue-400">Product Origin:</span> 
+                              <span className="ml-1 px-2 py-0.5 bg-blue-400/20 rounded text-blue-300">VERIFIED</span>
+                            </div>
+                            
+                            <div className="font-mono text-xs text-left text-slate-500 mb-1">
+                              <span className="text-slate-400">Supply Chain Data:</span> 
+                              <span className="ml-1 px-2 py-0.5 bg-slate-700 text-transparent">HIDDEN</span>
+                            </div>
+                            
+                            <div className="font-mono text-xs text-left text-slate-500">
+                              <span className="text-slate-400">Manufacturing Process:</span> 
+                              <span className="ml-1 px-2 py-0.5 bg-slate-700 text-transparent">HIDDEN</span>
+                            </div>
+                          </div>
+                          
+                          {/* Lock in the middle showing data is secure */}
+                          <motion.div 
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                          >
+                            <div className="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full p-3 shadow-lg shadow-indigo-500/30">
+                              <Lock size={20} className="text-white" />
+                            </div>
+                          </motion.div>
                         </div>
-                        <div className="flex justify-center space-x-2 mt-2">
-                          <div className="w-12 h-3 rounded-full bg-slate-700"></div>
-                          <div className="w-16 h-3 rounded-full bg-slate-700"></div>
+                        
+                        <div className="mt-6 text-center">
+                          <p className="text-sm text-white font-medium">Only the proof is shared</p>
+                          <p className="text-xs text-slate-400">Sensitive data stays private</p>
                         </div>
                       </div>
                     </motion.div>
