@@ -21,6 +21,7 @@ export default function DocsLayout({
     { href: '/docs/smart-contracts', title: 'Smart Contracts' },
     { href: '/docs/interoperability', title: 'Interoperability' },
     { href: '/docs/token-economics', title: 'Token Economics' },
+    { href: '/docs/integration-tests', title: 'Integration Tests' },
   ]
   
   return (
