@@ -173,10 +173,10 @@ export function ZkOriginProofs() {
                     >
                       {/* Clear, step-by-step ZK Proof Visualization */}
                       <div className="text-center w-full h-full flex flex-col">
-                        <h4 className="text-white text-sm font-medium mb-3">Step-by-step Example:</h4>
+                        <h4 className="text-white text-sm font-medium mb-3 bg-red-600 p-2 rounded-md">⚠️ UPDATED VISUALIZATION - STEP BY STEP EXAMPLE:</h4>
                         
                         {/* Step 1 */}
-                        <div className="flex items-center mb-4 bg-slate-800/70 rounded-lg p-2">
+                        <div className="flex items-center mb-4 bg-slate-800/70 rounded-lg p-2 border-2 border-red-500">
                           <div className="bg-blue-500 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mr-3">1</div>
                           <div className="text-left">
                             <p className="text-white text-xs font-medium">Exporter has sensitive origin data</p>
