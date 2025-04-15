@@ -1,74 +1,161 @@
 # Origin Verifier Pallet
 
-The Origin Verifier pallet is a core component of the Aduana platform, responsible for managing and verifying supply chain origin claims using zero-knowledge proofs.
+A Substrate pallet for verifying product origins using zero-knowledge proofs and decentralized identity.
 
-## Features
+## Overview
 
-- **Product Registration**: Allows manufacturers to register products with detailed information
-- **Zero-Knowledge Claim Verification**: Processes and verifies origin claims without revealing sensitive data
-- **Fee Management**: Implements a fee structure for verification services
-- **Admin Controls**: Provides administrative capabilities for claim disputes and revocation
-- **Integration with External Verifiers**: Supports pluggable verification mechanisms
+The Origin Verifier pallet enables the registration and verification of products with their origin information, essential for international trade tariff calculations. It supports:
 
-## Storage Items
+- Registering products with verifiable origin information
+- Submitting zero-knowledge proofs for origin verification
+- Cross-chain verification for multi-chain ecosystems
+- Integration with Proof of Provenance (POP) for decentralized identity
 
-- `Products`: Maps product IDs to their registered information
-- `Claims`: Stores ZK claims associated with product origins
-- `Verifications`: Tracks verification statuses of claims
-- `VerificationFee`: Current fee for claim verification services
-- `Admins`: Set of accounts with administrative privileges
+## Key Features
 
-## Extrinsics (Transaction Calls)
+### Zero-Knowledge Proof Verification
+Products can be registered with claims that are verified using zero-knowledge proofs, allowing the verification of origin information without revealing sensitive supply chain data.
 
-- `register_product`: Register a new product with origin information
-- `update_product`: Update an existing product's information
-- `submit_claim`: Submit a ZK claim for a product's origin
-- `verify_claim`: Verify a submitted ZK claim
-- `revoke_verification`: Admin function to revoke a verification
-- `set_verification_fee`: Admin function to update the verification fee
-- `add_admin`: Add a new admin account
-- `remove_admin`: Remove an admin account
+### Cross-Chain Integration
+The pallet supports XCM (Cross-Consensus Message Format) for verifying claims across different parachains, enabling a decentralized verification network.
 
-## Integration Tests
+### Decentralized Identity Integration
+Integration with POP allows for resolving DIDs (Decentralized Identifiers) linked to importers, exporters, and other supply chain participants.
 
-The pallet includes comprehensive integration tests in `src/integration_tests.rs` that validate:
+### Admin Privileges
+Certain actions, like updating verification fees and revoking previously verified claims, require admin privileges for security.
 
-1. Verification fee charging mechanism
-2. Insufficient balance handling
-3. Product information update permissions
-4. Admin verification revocation functions
-5. Event emission for relevant actions
-6. Error handling for invalid operations
+### Verification Fee System
+Verification requires a fee that is reserved when submitting a claim and is distributed between the verifier and treasury upon successful verification.
 
-Run the integration tests with:
+## Getting Started
+
+### Configuration
+
+The pallet can be configured with the following parameters:
+
+```rust
+#[pallet::config]
+pub trait Config: frame_system::Config {
+    type RuntimeEvent: From<Event<Self>> + IsType<<Self as frame_system::Config>::RuntimeEvent>;
+    type Currency: ReservableCurrency<Self::AccountId>;
+    type VerificationFee: Get<BalanceOf<Self>>;
+    type MaxClaimsPerProduct: Get<u32>;
+    type MaxMetadataLength: Get<u32>;
+    type VerificationTimeout: Get<Self::BlockNumber>;
+    type AdminAccount: Get<Self::AccountId>;
+}
+```
+
+### Basic Usage
+
+#### Register a Product
+
+```rust
+// Register a new product with origin information
+OriginVerifier::register_product(
+    origin,
+    product_id,
+    name,
+    description,
+    origin_country,
+    hs_code,
+    manufacture_date,
+    metadata,
+    owner_did,
+)
+```
+
+#### Submit a Claim for Verification
+
+```rust
+// Submit a claim with a zero-knowledge proof
+OriginVerifier::submit_claim(
+    origin,
+    product_id,
+    claim,
+    claim_id,
+)
+```
+
+#### Verify a Claim
+
+```rust
+// Manually verify a claim (requires authorized verifier)
+OriginVerifier::verify_claim(
+    origin,
+    product_id,
+    claim_id,
+    approved,
+    reason,
+)
+```
+
+### Advanced Usage
+
+#### Cross-Chain Verification
+
+```rust
+// Submit a verification request to another parachain
+OriginVerifier::submit_cross_chain_verification(
+    origin,
+    para_id,
+    product_id,
+    claim,
+    claim_id,
+)
+```
+
+#### Revoke a Verification
+
+```rust
+// Revoke a previously approved claim (admin only)
+OriginVerifier::revoke_claim(
+    origin,
+    product_id,
+    claim_id,
+    reason,
+)
+```
+
+## Runtime Integration
+
+The pallet includes a runtime integration module that provides:
+
+- Zero-knowledge proof verification with external verifiers
+- DID resolution for identity verification
+- XCM integration for cross-chain verification
+
+## Testing
+
+The pallet includes comprehensive unit and integration tests covering:
+
+- Basic product registration and claim verification
+- Cross-chain verification flows
+- Admin privilege controls
+- Verification timeout handling
+- Error cases and security constraints
+
+Run tests with:
 
 ```bash
 cargo test -p pallet-origin-verifier
 ```
 
-## Usage in Runtime
+For integration tests specifically:
 
-To include this pallet in a runtime:
-
-```rust
-parameter_types! {
-    pub const VerificationFeeDefault: Balance = 100 * DOLLARS;
-}
-
-impl pallet_origin_verifier::Config for Runtime {
-    type RuntimeEvent = RuntimeEvent;
-    type Currency = Balances;
-    type WeightInfo = pallet_origin_verifier::weights::SubstrateWeight<Runtime>;
-    type DefaultVerificationFee = VerificationFeeDefault;
-    type ProductId = u32;
-    type ClaimId = u32;
-    // Additional configuration parameters...
-}
+```bash
+cargo test -p pallet-origin-verifier --test integration_tests
 ```
 
-## Dependencies
+## License
 
-- `frame_support`: Core FRAME libraries
-- `frame_system`: System-level functions and types
-- `pallet_balances`: For fee handling
-- Additional cryptographic libraries for ZK proof verification 
+Licensed under the terms of the [MIT License](LICENSE).
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Note
+
+This pallet is part of the Aduana project for decentralized international trade facilitation. 

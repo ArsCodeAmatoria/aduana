@@ -557,4 +557,339 @@ fn only_owner_or_admin_can_verify_claims() {
         let product = OriginVerifier::products(&product_id).unwrap();
         assert!(product.verified);
     });
+}
+
+#[test]
+fn test_cross_chain_verification_flow() {
+    use frame_support::{assert_ok, assert_noop};
+    use crate::{mock::*, runtime_integration::*, Error, VerificationStatus, PendingVerifications, CrossChainVerifications};
+    use frame_system::pallet_prelude::*;
+    use frame_support::traits::{OnInitialize, OnFinalize};
+    
+    new_test_ext().execute_with(|| {
+        // Setup: Register a product
+        let product_id = b"product123".to_vec();
+        let claim_id = b"claim123".to_vec();
+        
+        assert_ok!(
+            OriginVerifier::register_product(
+                RuntimeOrigin::signed(ALICE),
+                product_id.clone(),
+                b"Test Product".to_vec(),
+                b"A product for testing".to_vec(),
+                b"US".to_vec(),
+                b"1234.56.78".to_vec(),
+                1234567890,
+                b"Test metadata".to_vec(),
+                Some(b"did:pop:alice".to_vec()),
+            )
+        );
+        
+        // Setup: Create a valid claim for cross-chain verification
+        let claim = ZkClaim {
+            claim_type: ClaimType::OriginCountry,
+            public_inputs: b"test inputs".to_vec(),
+            proof: vec![0x01, 2, 3, 4], // Valid proof
+            metadata: b"test metadata".to_vec(),
+            timestamp: 1234567890,
+        };
+        
+        // Test: Submit a cross-chain verification request
+        assert_ok!(
+            OriginVerifier::submit_cross_chain_verification(
+                RuntimeOrigin::signed(ALICE),
+                200, // Para ID 200
+                product_id.clone(),
+                claim.clone(),
+                claim_id.clone(),
+            )
+        );
+        
+        // Verify cross-chain verification is pending
+        let claims = OriginVerifier::product_claims(&product_id);
+        assert_eq!(claims.len(), 1);
+        assert!(matches!(claims[0].status, VerificationStatus::Pending));
+        assert!(claims[0].is_cross_chain);
+        assert_eq!(claims[0].source_para_id, Some(200));
+        
+        // Verify the CrossChainVerifications storage contains our request
+        assert!(CrossChainVerifications::<Test>::contains_key(&claim_id));
+        
+        // Test: Simulate receiving a cross-chain verification response
+        let message = CrossChainMessage::VerificationResponse {
+            claim_id: claim_id.clone(),
+            result: VerificationResult::Success,
+        };
+        
+        assert_ok!(OriginVerifier::handle_cross_chain_message(200, message));
+        
+        // Verify the claim is now approved
+        let claims = OriginVerifier::product_claims(&product_id);
+        assert_eq!(claims.len(), 1);
+        assert!(matches!(claims[0].status, VerificationStatus::Approved));
+        
+        // Verify the CrossChainVerifications storage no longer contains our request
+        assert!(!CrossChainVerifications::<Test>::contains_key(&claim_id));
+        
+        // Verify the product's origin is now verified
+        let product = OriginVerifier::products(&product_id).unwrap();
+        assert!(product.origin_verified);
+        
+        // Test error: Submit a cross-chain verification for a non-existent product
+        let bad_product_id = b"doesnotexist".to_vec();
+        let bad_claim_id = b"badclaim".to_vec();
+        
+        assert_noop!(
+            OriginVerifier::submit_cross_chain_verification(
+                RuntimeOrigin::signed(ALICE),
+                200,
+                bad_product_id,
+                claim.clone(),
+                bad_claim_id,
+            ),
+            Error::<Test>::ProductNotFound
+        );
+        
+        // Test: Test timeout handling
+        let timeout_product_id = b"timeout_product".to_vec();
+        let timeout_claim_id = b"timeout_claim".to_vec();
+        
+        // Register the product
+        assert_ok!(
+            OriginVerifier::register_product(
+                RuntimeOrigin::signed(ALICE),
+                timeout_product_id.clone(),
+                b"Timeout Product".to_vec(),
+                b"A product for testing timeouts".to_vec(),
+                b"JP".to_vec(),
+                b"9876.54.32".to_vec(),
+                1234567890,
+                b"Test metadata".to_vec(),
+                None,
+            )
+        );
+        
+        // Create a claim that will timeout
+        let timeout_claim = ZkClaim {
+            claim_type: ClaimType::OriginCountry,
+            public_inputs: b"test inputs".to_vec(),
+            proof: vec![0x02, 2, 3, 4], // Pending proof
+            metadata: b"test metadata".to_vec(),
+            timestamp: 1234567890,
+        };
+        
+        // Submit the claim
+        assert_ok!(
+            OriginVerifier::submit_claim(
+                RuntimeOrigin::signed(ALICE),
+                timeout_product_id.clone(),
+                timeout_claim,
+                timeout_claim_id.clone(),
+            )
+        );
+        
+        // Verify the claim is pending
+        let claims = OriginVerifier::product_claims(&timeout_product_id);
+        assert_eq!(claims.len(), 1);
+        assert!(matches!(claims[0].status, VerificationStatus::Pending));
+        
+        // Advance blocks past the timeout period
+        let timeout = VerificationTimeout::get();
+        for _ in 0..timeout + 1 {
+            System::set_block_number(System::block_number() + 1);
+            OriginVerifier::on_initialize(System::block_number());
+            OriginVerifier::on_finalize(System::block_number());
+        }
+        
+        // Verify the claim is now timed out
+        let claims = OriginVerifier::product_claims(&timeout_product_id);
+        assert_eq!(claims.len(), 1);
+        assert!(matches!(claims[0].status, VerificationStatus::TimedOut));
+        
+        // Verify the pending verification has been removed
+        assert!(!PendingVerifications::<Test>::contains_key(&timeout_claim_id));
+    });
+}
+
+#[test]
+fn test_admin_privileges() {
+    use frame_support::{assert_ok, assert_noop};
+    use crate::{mock::*, runtime_integration::*, Error, VerificationStatus, AuthorizedVerifiers};
+    
+    new_test_ext().execute_with(|| {
+        // Test: Add a new authorized verifier
+        assert_ok!(
+            OriginVerifier::set_verifier_authorization(
+                RuntimeOrigin::signed(ADMIN),
+                BOB,
+                true,
+            )
+        );
+        
+        // Verify BOB is now an authorized verifier
+        assert!(AuthorizedVerifiers::<Test>::get(&BOB));
+        
+        // Test: Non-admin cannot add verifiers
+        assert_noop!(
+            OriginVerifier::set_verifier_authorization(
+                RuntimeOrigin::signed(ALICE),
+                CHARLIE,
+                true,
+            ),
+            Error::<Test>::RequiresAdminPrivileges
+        );
+        
+        // Test: Update verification fee
+        let new_fee: u64 = 200;
+        assert_ok!(
+            OriginVerifier::update_verification_fee(
+                RuntimeOrigin::signed(ADMIN),
+                ClaimType::OriginCountry,
+                new_fee,
+            )
+        );
+        
+        // Test: Non-admin cannot update verification fee
+        assert_noop!(
+            OriginVerifier::update_verification_fee(
+                RuntimeOrigin::signed(ALICE),
+                ClaimType::OriginCountry,
+                300,
+            ),
+            Error::<Test>::RequiresAdminPrivileges
+        );
+        
+        // Setup: Register a product and submit a claim
+        let product_id = b"admin_test_product".to_vec();
+        let claim_id = b"admin_test_claim".to_vec();
+        
+        assert_ok!(
+            OriginVerifier::register_product(
+                RuntimeOrigin::signed(ALICE),
+                product_id.clone(),
+                b"Admin Test Product".to_vec(),
+                b"A product for testing admin privileges".to_vec(),
+                b"UK".to_vec(),
+                b"1234.56.78".to_vec(),
+                1234567890,
+                b"Test metadata".to_vec(),
+                None,
+            )
+        );
+        
+        let claim = ZkClaim {
+            claim_type: ClaimType::OriginCountry,
+            public_inputs: b"test inputs".to_vec(),
+            proof: vec![0x01, 2, 3, 4], // Valid proof
+            metadata: b"test metadata".to_vec(),
+            timestamp: 1234567890,
+        };
+        
+        assert_ok!(
+            OriginVerifier::submit_claim(
+                RuntimeOrigin::signed(ALICE),
+                product_id.clone(),
+                claim,
+                claim_id.clone(),
+            )
+        );
+        
+        // Test: Admin can verify claims
+        assert_ok!(
+            OriginVerifier::verify_claim(
+                RuntimeOrigin::signed(ADMIN),
+                product_id.clone(),
+                claim_id.clone(),
+                true,
+                None,
+            )
+        );
+        
+        // Verify the claim is approved
+        let claims = OriginVerifier::product_claims(&product_id);
+        assert_eq!(claims.len(), 1);
+        assert!(matches!(claims[0].status, VerificationStatus::Approved));
+        
+        // Test: Admin can revoke approvals
+        let revocation_reason = b"Fraudulent claim".to_vec();
+        assert_ok!(
+            OriginVerifier::revoke_claim(
+                RuntimeOrigin::signed(ADMIN),
+                product_id.clone(),
+                claim_id.clone(),
+                revocation_reason.clone(),
+            )
+        );
+        
+        // Verify the claim is now revoked
+        let claims = OriginVerifier::product_claims(&product_id);
+        assert_eq!(claims.len(), 1);
+        if let VerificationStatus::Revoked(reason) = &claims[0].status {
+            assert_eq!(reason, &revocation_reason);
+        } else {
+            panic!("Claim should be in Revoked state");
+        }
+        
+        // Test: Only admin can revoke claims
+        let another_product_id = b"another_product".to_vec();
+        let another_claim_id = b"another_claim".to_vec();
+        
+        assert_ok!(
+            OriginVerifier::register_product(
+                RuntimeOrigin::signed(BOB),
+                another_product_id.clone(),
+                b"Another Product".to_vec(),
+                b"Another test product".to_vec(),
+                b"DE".to_vec(),
+                b"4321.87.65".to_vec(),
+                1234567890,
+                b"Test metadata".to_vec(),
+                None,
+            )
+        );
+        
+        let another_claim = ZkClaim {
+            claim_type: ClaimType::OriginCountry,
+            public_inputs: b"test inputs".to_vec(),
+            proof: vec![0x01, 2, 3, 4], // Valid proof
+            metadata: b"test metadata".to_vec(),
+            timestamp: 1234567890,
+        };
+        
+        assert_ok!(
+            OriginVerifier::submit_claim(
+                RuntimeOrigin::signed(BOB),
+                another_product_id.clone(),
+                another_claim,
+                another_claim_id.clone(),
+            )
+        );
+        
+        // Have BOB (authorized verifier) approve the claim
+        assert_ok!(
+            OriginVerifier::verify_claim(
+                RuntimeOrigin::signed(BOB),
+                another_product_id.clone(),
+                another_claim_id.clone(),
+                true,
+                None,
+            )
+        );
+        
+        // BOB attempts to revoke his own verified claim
+        assert_noop!(
+            OriginVerifier::revoke_claim(
+                RuntimeOrigin::signed(BOB),
+                another_product_id.clone(),
+                another_claim_id.clone(),
+                b"I changed my mind".to_vec(),
+            ),
+            Error::<Test>::RequiresAdminPrivileges
+        );
+        
+        // The claim should still be approved
+        let claims = OriginVerifier::product_claims(&another_product_id);
+        assert_eq!(claims.len(), 1);
+        assert!(matches!(claims[0].status, VerificationStatus::Approved));
+    });
 } 

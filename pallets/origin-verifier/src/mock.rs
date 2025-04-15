@@ -135,6 +135,8 @@ parameter_types! {
     pub const AdminAccount: u64 = ADMIN;
     pub const DefaultVerificationFee: u64 = 100;
     pub const MaxClaimsPerProduct: u32 = 10;
+    pub const MaxMetadataLength: u32 = 1024;
+    pub const VerificationTimeout: u64 = 10; // 10 blocks
 }
 
 impl pallet_origin_verifier::Config for Test {
@@ -142,6 +144,9 @@ impl pallet_origin_verifier::Config for Test {
     type Currency = Balances;
     type VerificationFee = DefaultVerificationFee;
     type MaxClaimsPerProduct = MaxClaimsPerProduct;
+    type MaxMetadataLength = MaxMetadataLength;
+    type VerificationTimeout = VerificationTimeout;
+    type AdminAccount = AdminAccount;
 }
 
 // Build genesis storage according to the mock runtime
@@ -158,5 +163,77 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
         ],
     }.assimilate_storage(&mut t).unwrap();
     
+    // Initialize authorized verifiers
+    pallet_origin_verifier::GenesisConfig::<Test> {
+        authorized_verifiers: vec![
+            (ADMIN, true),
+            (ALICE, true),
+        ],
+        verification_fees: vec![
+            (crate::runtime_integration::ClaimType::OriginCountry, 100),
+            (crate::runtime_integration::ClaimType::Manufacturing, 150),
+            (crate::runtime_integration::ClaimType::Shipping, 200),
+            (crate::runtime_integration::ClaimType::Customs, 250),
+            (crate::runtime_integration::ClaimType::Certification, 300),
+        ],
+    }.assimilate_storage(&mut t).unwrap();
+    
     t.into()
+}
+
+// Helper functions for testing
+pub mod test_helpers {
+    use super::*;
+    use crate::runtime_integration::{ClaimType, ZkClaim};
+    
+    // Create a basic product for testing
+    pub fn create_test_product(id: &[u8], owner: u64) -> crate::Product<Test> {
+        use frame_support::BoundedVec;
+        
+        crate::Product {
+            id: id.to_vec(),
+            owner,
+            name: b"Test Product".to_vec(),
+            description: b"A product for testing".to_vec(),
+            origin_country: b"US".to_vec(),
+            hs_code: b"1234.56.78".to_vec(),
+            manufacture_date: 1234567890,
+            origin_verified: false,
+            metadata: BoundedVec::truncate_from(b"Test metadata".to_vec()),
+            registered_at: 1,
+            active: true,
+        }
+    }
+    
+    // Create a test claim for verification
+    pub fn create_test_claim(claim_type: ClaimType, proof_prefix: u8) -> ZkClaim {
+        ZkClaim {
+            claim_type,
+            public_inputs: b"test inputs".to_vec(),
+            proof: vec![proof_prefix, 2, 3, 4], // First byte determines test verification result
+            metadata: b"test metadata".to_vec(),
+            timestamp: 1234567890,
+        }
+    }
+    
+    // Create a verified claim for testing
+    pub fn create_verified_claim(
+        claim: ZkClaim,
+        submitter: u64,
+        block: u64,
+        status: crate::VerificationStatus,
+        claim_id: &[u8],
+    ) -> crate::VerifiedClaim<Test> {
+        crate::VerifiedClaim {
+            claim,
+            submitter,
+            submitted_at: block,
+            status,
+            verifier: None,
+            verified_at: None,
+            claim_id: claim_id.to_vec(),
+            is_cross_chain: false,
+            source_para_id: None,
+        }
+    }
 } 
