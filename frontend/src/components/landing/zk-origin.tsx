@@ -71,7 +71,7 @@ export function ZkOriginProofs() {
           <h2 className="text-4xl font-bold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300">Zero-Knowledge Origin Proofs</h2>
           
           <p className="text-slate-300 md:text-lg max-w-3xl mx-auto">
-            Our zero-knowledge proofs allow exporters to verify product origins without revealing sensitive business information, ensuring privacy and trust.
+            Our revolutionary zero-knowledge protocol enables secure verification of product origins while preserving confidentiality of critical supply chain data, creating trust in international trade without compromising competitive advantages.
           </p>
         </motion.div>
         
