@@ -1,5 +1,5 @@
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@import "tailwindcss/preflight.css";
+@import "tailwindcss/utilities.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -112,27 +112,26 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+* {
+  border-color: var(--border);
+  outline-color: rgb(var(--ring) / 0.5);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-@layer utilities {
-  /* Add shimmer animation keyframe for tokenomics chart */
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
+/* Add shimmer animation keyframe for tokenomics chart */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
