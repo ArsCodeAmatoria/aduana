@@ -171,69 +171,68 @@ export function ZkOriginProofs() {
                       transition={{ duration: 1 }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      {/* Improved ZK Proof Visualization */}
-                      <div className="text-center w-full">
-                        <div className="flex justify-between items-center mb-6 px-4">
-                          <div className="text-center">
-                            <div className="bg-blue-600/20 p-3 rounded-full mb-2">
-                              <Shield size={28} className="text-blue-400" />
+                      {/* Clear, step-by-step ZK Proof Visualization */}
+                      <div className="text-center w-full h-full flex flex-col">
+                        <h4 className="text-white text-sm font-medium mb-3">Step-by-step Example:</h4>
+                        
+                        {/* Step 1 */}
+                        <div className="flex items-center mb-4 bg-slate-800/70 rounded-lg p-2">
+                          <div className="bg-blue-500 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mr-3">1</div>
+                          <div className="text-left">
+                            <p className="text-white text-xs font-medium">Exporter has sensitive origin data</p>
+                            <div className="mt-1 bg-slate-700 p-1 rounded text-xs font-mono flex">
+                              <span className="text-blue-300">Country</span>
+                              <span className="text-slate-300 px-1">=</span>
+                              <span className="text-green-300">"Japan"</span>
+                              <span className="text-orange-300 ml-1">+ supply chain details</span>
                             </div>
-                            <p className="text-sm text-blue-300">Exporter</p>
-                          </div>
-                          
-                          <div className="h-0.5 flex-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-2"></div>
-                          
-                          <div className="text-center">
-                            <div className="bg-indigo-600/20 p-3 rounded-full mb-2">
-                              <CheckCircle size={28} className="text-indigo-400" />
-                            </div>
-                            <p className="text-sm text-indigo-300">Importer</p>
                           </div>
                         </div>
                         
-                        {/* Data flow visualization */}
-                        <div className="flex items-center justify-center relative">
-                          <div className="bg-slate-800 rounded-lg p-3 w-full max-w-[220px]">
-                            <div className="font-mono text-xs text-left mb-1 text-slate-300">
-                              <span className="text-blue-400">Product Origin:</span> 
-                              <span className="ml-1 px-2 py-0.5 bg-blue-400/20 rounded text-blue-300">VERIFIED</span>
-                            </div>
-                            
-                            <div className="font-mono text-xs text-left text-slate-500 mb-1">
-                              <span className="text-slate-400">Supply Chain Data:</span> 
-                              <span className="ml-1 px-2 py-0.5 bg-slate-700 text-transparent">HIDDEN</span>
-                            </div>
-                            
-                            <div className="font-mono text-xs text-left text-slate-500">
-                              <span className="text-slate-400">Manufacturing Process:</span> 
-                              <span className="ml-1 px-2 py-0.5 bg-slate-700 text-transparent">HIDDEN</span>
+                        {/* Step 2 */}
+                        <div className="flex items-center mb-4 bg-slate-800/70 rounded-lg p-2">
+                          <div className="bg-indigo-500 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mr-3">2</div>
+                          <div className="text-left">
+                            <p className="text-white text-xs font-medium">Generate cryptographic proof</p>
+                            <div className="bg-slate-700 p-1 rounded text-xs font-mono mt-1 relative overflow-hidden">
+                              <motion.div
+                                animate={{ x: [-20, 140] }}
+                                transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop" }}
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-500/30 to-transparent"
+                              />
+                              <span className="text-purple-300">hash(data + salt) → zkp92fd...</span>
                             </div>
                           </div>
-                          
-                          {/* Lock in the middle showing data is secure */}
-                          <motion.div 
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                          >
-                            <div className="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full p-3 shadow-lg shadow-indigo-500/30">
-                              <Lock size={20} className="text-white" />
-                            </div>
-                          </motion.div>
                         </div>
                         
-                        <div className="mt-6 text-center">
-                          <p className="text-sm text-white font-medium">Only the proof is shared</p>
-                          <p className="text-xs text-slate-400">Sensitive data stays private</p>
+                        {/* Step 3 */}
+                        <div className="flex items-center bg-slate-800/70 rounded-lg p-2">
+                          <div className="bg-teal-500 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mr-3">3</div>
+                          <div className="text-left flex-1">
+                            <p className="text-white text-xs font-medium">Share only verifiable proof</p>
+                            <div className="bg-slate-900 p-1.5 rounded text-xs font-mono mt-1 border border-slate-700 flex justify-between items-center">
+                              <span className="text-slate-300 flex items-center">
+                                <span className="bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded mr-2 text-[10px]">VERIFIED</span>
+                                <span>Origin: Japan</span>
+                              </span>
+                              <span className="text-slate-500 text-[10px]">
+                                <Lock size={10} className="inline mr-1" /> Details hidden
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Result */}
+                        <div className="mt-auto pt-4 flex items-center justify-center">
+                          <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-0.5 rounded-lg">
+                            <div className="bg-slate-800 rounded px-3 py-1.5 flex items-center">
+                              <CheckCircle size={14} className="text-green-400 mr-2" />
+                              <span className="text-white text-xs font-medium">Importer verifies origin without seeing sensitive data</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
-                    
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 h-10 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-medium">Verified ✓</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
