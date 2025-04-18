@@ -54,12 +54,6 @@ export function Footer() {
             <a href="#" className="text-sm text-slate-500 hover:text-white transition-colors">Cookie Policy</a>
           </div>
         </div>
-
-        <div className="flex items-center justify-center mt-6 pt-6 border-t border-slate-800">
-          <p className="text-sm text-gray-500">
-            Built by <a href="https://github.com/arscodex" className="text-gray-400 hover:text-white transition-colors">Ars Code Amatoria</a> | <a href="https://arscodex.dev" className="text-gray-400 hover:text-white transition-colors">arscodex.dev</a>
-          </p>
-        </div>
       </div>
     </footer>
   )
