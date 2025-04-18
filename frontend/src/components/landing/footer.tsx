@@ -56,15 +56,9 @@ export function Footer() {
         </div>
 
         <div className="flex items-center justify-center mt-6 pt-6 border-t border-slate-800">
-          <p className="text-sm text-slate-400">
-            Built by{" "}
-            <a href="https://github.com/ArsCodeAmatoria" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
-              Ars Code Amatoria
-            </a>{" "}
-            •{" "}
-            <a href="https://www.arscode.org/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
-              arscode.org
-            </a>
+          <p className="text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} Aduana Protocol. All rights reserved. 
+            Built by <a href="https://github.com/arscodex" className="text-gray-400 hover:text-white transition-colors">Ars Code Amatoria</a> | <a href="https://arscodex.dev" className="text-gray-400 hover:text-white transition-colors">arscodex.dev</a>
           </p>
         </div>
       </div>
