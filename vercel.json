@@ -1,11 +1,8 @@
 {
-  "version": 2,
-  "projectSettings": {
-    "framework": "nextjs",
-    "buildCommand": null,
-    "devCommand": null,
-    "installCommand": null,
-    "outputDirectory": null,
-    "rootDirectory": "frontend"
-  }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/frontend/$1" }
+  ],
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/.next",
+  "installCommand": "cd frontend && npm install"
 } 
